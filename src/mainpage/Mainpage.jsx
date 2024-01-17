@@ -14,6 +14,7 @@ function Mainpage({setAuthorized, mail}) {
     { id: 1, title: "Content Title 1", description: "Content Description 1"},
     { id: 2, title: "Content Title 2", description: "Content Description 2"},
     { id: 3, title: "Content Title 3", description: "Content Description 3"},
+    { id: 4, title: "Content Title 4", description: "Content Description 4"},
   ])
 
   return (
