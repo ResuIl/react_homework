@@ -27,9 +27,12 @@ function Mainpage({setAuthorized, mail}) {
           <DeleteCard contentData={contentData} setContentData={setContentData} currentKey={currentKey} isDeleteCardActive={isDeleteCardActive} setDeleteCardState={setDeleteCardState}/>
           <CreateCard contentData={contentData} setContentData={setContentData} isCreateCardActive={isCreateCardActive} setCreateCardState={setCreateCardState}/>
           
-          {contentData.map((content) => (
-            <ContentCard key={content.id} currentKey={content.id} title={content.title} description={content.description} setCurrentKey={setCurrentKey} setEditCardState={setEditCardState} setDeleteCardState={setDeleteCardState}/>
-          ))}
+          {contentData.length > 0 ? 
+            contentData.map((content) => (
+              <ContentCard key={content.id} currentKey={content.id} title={content.title} description={content.description} setCurrentKey={setCurrentKey} setEditCardState={setEditCardState} setDeleteCardState={setDeleteCardState}/>
+            )) : <h1 className='flex justify-center w-screen'>No Content Data Found</h1> 
+          }
+
         </div>     
       </main>
     </>
