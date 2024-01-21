@@ -1,9 +1,9 @@
 import React from 'react'
 import LoginCard from './components/LoginCard'
 
-function Login({setAuthorized,mail,setMail}) {
+function Login() {
   return (
-    <LoginCard setAuthorized={setAuthorized} mail={mail} setMail={setMail} />
+    <LoginCard/>
   )
 }
 

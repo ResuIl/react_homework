@@ -1,7 +1,9 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import Context from '../../ContextWrapper';
 
-function LoginCard({setAuthorized, mail, setMail}) {
+function LoginCard() {
   const [isValid,setIsValid] = useState(false)
+  const { mail, setAuthorized, setMail } = useContext(Context);
   return (
     <div className='flex h-screen justify-center items-center'>
       <form className='m-5 flex flex-col items-center justify-center w-full sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-[50%] 2xl:w-[40%] h-auto sm:h-[350px] md:h-[380px] lg:h-[400px] xl:h-[420px] 2xl:h-[450px] shadow shadow-zinc-395 rounded-[16px]'>

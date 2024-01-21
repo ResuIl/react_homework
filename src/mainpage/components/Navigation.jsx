@@ -1,6 +1,8 @@
-import React from 'react'
+import { useContext } from 'react'
+import Context from '../../ContextWrapper';
 
-function Navigation({setAuthorized , mail}) {
+function Navigation() {
+  const { mail, setAuthorized } = useContext(Context);
   return (
     <nav className='flex bg-zinc-400 h-[10vh]'>
         <div className="flex-none h-50 p-7">
