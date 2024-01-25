@@ -1,8 +1,10 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { v4 as uuidv4 } from 'uuid';
+import Context from '../../ContextWrapper';
 
-function CreateCard({dispatch, setCards, mail}) {
+function CreateCard() {
   const [formData, setFormData] = useState({});
+  const {mail,dispatch, getData } = useContext(Context);
 
   const handleChange = (e) =>{
     const { name, value } = e.target;
@@ -14,10 +16,29 @@ function CreateCard({dispatch, setCards, mail}) {
     }));
   };
 
-  const createCard = (e) =>{
+  const createCard = async (e) => {
     e.preventDefault();
-    setCards((prevValue) => [...prevValue, formData]);
-    dispatch({ type: "reset" });
+    try {
+      const response = await fetch('http://localhost:3000/cards', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to create card');
+      }
+      else{
+        getData()
+      }
+      const newCard = await response.json();
+      console.log(newCard);
+      dispatch({ type: 'reset' });
+    } catch (error) {
+      console.error('Error creating card:', error.message);
+    }
   };
 
   return (

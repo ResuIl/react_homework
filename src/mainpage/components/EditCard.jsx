@@ -1,15 +1,36 @@
-import { useState } from 'react'
+import { useState, useContext  } from 'react'
+import Context from '../../ContextWrapper';
 
-function EditCard({ dispatch, setCards, activeCard }) {
+function EditCard({ activeCard  }) {
+  const {dispatch, getData } = useContext(Context);
   const [formData, setFormData] = useState({
     title: activeCard.title,
     description: activeCard.description,
   });
+
+  const updateCard = async (cardId, updatedData) => {
+    try {
+      const response = await fetch(`http://localhost:3000/cards/${cardId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedData),
+      });
+      if (response.ok) {
+        getData()
+      }
+      const data = await response.json();
+      console.log("Updated Card:", data);
+    } catch (error) {
+      console.error("Error updating card:", error);
+    }
+  };
   
   const handleSave = (e) => {
     e.preventDefault()
     const updatedCard = { ...activeCard, ...formData };
-    setCards((prevValue) => prevValue.map(card => card.id === activeCard.id ? updatedCard : card))
+    updateCard(activeCard._id, updatedCard);
     dispatch({ type: "reset" });
   };
 
